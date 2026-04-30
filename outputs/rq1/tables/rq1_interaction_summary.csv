@@ -1,0 +1,15 @@
+perturbation_type,linguistic_category,mean_entropy,n
+back_translation,function_word,0.09656336071428251,18
+back_translation,mixed,0.11652597855425437,1248
+back_translation,modifier,0.12875114761904335,18
+back_translation,noun,0.20798262307691617,39
+back_translation,verb,0.048281680357141255,36
+controlled_paraphrase,mixed,0.16932958825644376,1152
+controlled_paraphrase,verb,0.1657881846560804,27
+synonym_substitution,function_word,0.06666666666666667,15
+synonym_substitution,modifier,0.12761252153134592,417
+synonym_substitution,noun,0.13576164232048227,945
+synonym_substitution,verb,0.13331203313696546,582
+syntactic_reordering,mixed,0.24282549769710773,183
+syntactic_reordering,modifier,0.22680387774724906,78
+syntactic_reordering,noun,0.277250688571426,15

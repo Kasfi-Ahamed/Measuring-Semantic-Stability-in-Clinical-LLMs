@@ -8,7 +8,7 @@
         "\n",
         "## Research Question\n",
         "\n",
-        "**RQ1:** *Which linguistic properties of meaning-preserving perturbations — perturbation type, magnitude of lexical change, and grammatical category of modified tokens — are the strongest independent predictors of semantic entropy in clinical LLM outputs, and do these predictors interact?*\n",
+        "**RQ1:** *Which linguistic properties of meaning-preserving perturbations - perturbation type, magnitude of lexical change, and grammatical category of modified tokens - are the strongest independent predictors of semantic entropy in clinical LLM outputs, and do these predictors interact?*\n",
         "\n",
         "This notebook implements the RQ1 pipeline using **MedMentions** as the primary dataset. The dependent variable is **normalised semantic entropy** \\(\\hat{H}(x_0)\\), computed from the distribution of predicted concept clusters over the original input and validated perturbations.\n",
         "\n",

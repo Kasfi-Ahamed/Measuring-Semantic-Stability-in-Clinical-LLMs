@@ -1,5 +1,5 @@
 """
-Standalone UMLS pool builder — run in terminal, never in Jupyter.
+Standalone UMLS pool builder - run in terminal, never in Jupyter.
 Usage:
     cd /home/situser1/Entropy
     source .venv/bin/activate

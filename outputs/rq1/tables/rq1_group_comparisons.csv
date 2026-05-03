@@ -1,3 +1,3 @@
 comparison,test,statistic,p_value
-perturbation_type,Kruskal-Wallis,67.32108574792825,1.5986033860294508e-14
-linguistic_category,Kruskal-Wallis,24.13478651758381,7.505621471366568e-05
+perturbation_type,Kruskal-Wallis,67.22388698845417,1.677035908024415e-14
+linguistic_category,Kruskal-Wallis,22.363819602411624,0.00016961867085333348

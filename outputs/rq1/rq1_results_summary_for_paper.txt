@@ -1,7 +1,7 @@
 RQ1 Results Summary (Conditional Entropy Analysis)
 
 Strongest perturbation-type predictor term: C(perturbation_type)[T.syntactic_reordering].
-Strongest linguistic-category predictor term: C(linguistic_category)[T.modifier].
+Strongest linguistic-category predictor term: C(linguistic_category)[T.verb].
 Perturbation type with highest mean conditional normalised semantic entropy: syntactic_reordering.
 Most unstable linguistic category by mean conditional entropy: mixed.
 Lexical magnitude association: Spearman rho = 0.100, suggesting a positive association.

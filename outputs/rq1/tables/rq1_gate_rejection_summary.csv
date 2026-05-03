@@ -5,4 +5,4 @@ G6_entity_preservation,4267,133,0.030227272727272728
 G3_negation_preservation,4356,44,0.01
 G2_bidirectional_entailment,4367,33,0.0075
 Fallback_noop_rejection,4384,16,0.0036363636363636364
-G4_grammaticality,4397,3,0.0006818181818181819
+G4_grammaticality,4394,6,0.0013636363636363637

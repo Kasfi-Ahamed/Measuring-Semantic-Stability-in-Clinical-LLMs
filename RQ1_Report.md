@@ -196,15 +196,15 @@ requiring confirmatory analysis with a larger syntactic reordering sample.
 
 ## Statistical Summary
 
-| Predictor | β | 95% CI | BH-FDR p | Significant |
+| Predictor | β | 95% Bootstrap CI | BH-FDR p | Status |
 |---|---|---|---|---|
-| Syntactic reordering | +0.092 | [0.054, 0.131] | <0.001 | ✅ |
-| Lexical magnitude | +0.141 | [0.053, 0.229] | 0.007 | ✅ |
-| Task accuracy | −0.080 | [−0.135, −0.024] | 0.014 | ✅ |
-| Linguistic category (all) | - | - | >0.05 | ❌ |
-| Type × Category interaction | - | - | exploratory | - |
+| Syntactic reordering | +0.096 | [0.060, 0.157] | 8.5×10⁻⁶ | ✅ Significant |
+| Lexical magnitude | +0.143 | [0.012, 0.228] | 0.006 | ✅ Significant |
+| Task accuracy | −0.076 | [−0.115, −0.031] | 0.022 | ✅ Significant |
+| Linguistic category (all) | — | — | >0.30 | ❌ Not significant |
+| Type × Category interaction | — | — | exploratory | — |
 
-**Model:** MixedLM REML, converged (547 groups, 4,773 observations)
+**Model:** MixedLM REML, converged (547 groups, 4,800 observations, Marginal R²=0.2259, Conditional R²=0.2413, Bootstrap B=1,000 cluster resamples)
 **Note:** Cohen f² values were below the pre-registered threshold
 of 0.04 for all terms, indicating statistically reliable but small
 effects - consistent with the inherent complexity of clinical concept
@@ -240,4 +240,5 @@ grammatical class of the modified tokens alone.
 
 *Generated from RQ1_semantic_entropy_linguistic_predictors.ipynb*
 *N=550 instances | 2,674 perturbations | MixedLM REML converged*
+*Marginal R²=0.2259 | Conditional R²=0.2413*
 *UMLS-KB cosine similarity | BH-FDR q=0.05 | Bootstrap B=1,000*

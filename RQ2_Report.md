@@ -1,7 +1,7 @@
 ---
 
 # RQ2 Research Report: Accuracy-Stability Dissociation in Clinical LLMs
-## SIT723 — PhD Research Techniques and Applications
+## SIT723 - masters Research Techniques and Applications
 
 ---
 
@@ -84,13 +84,13 @@ observed is due to input variation, not random sampling.
 
 ## Results
 
-### Sub-question 1 — High-Accuracy Instances and Semantic Entropy
+### Sub-question 1 - High-Accuracy Instances and Semantic Entropy
 
 ![Figure 1](outputs/rq2/figures/rq2_figure1_accuracy_vs_entropy.png)
 
 *Figure 1. Scatter plot of mean task accuracy (x-axis) vs normalised
 semantic entropy Ĥ (y-axis) for all six models. Green shading marks
-the top accuracy quartile — the key region for SQ1. Spearman ρ shown
+the top accuracy quartile - the key region for SQ1. Spearman ρ shown
 in each panel title. If accuracy and entropy were correlated, dots in
 the green zone should cluster near the x-axis. They do not.*
 
@@ -98,14 +98,14 @@ the green zone should cluster near the x-axis. They do not.*
 
 Figure 1 shows the relationship between accuracy and semantic entropy
 for each of the six models. The critical observation is in the green
-shaded region — the top accuracy quartile. For every model, high
+shaded region - the top accuracy quartile. For every model, high
 accuracy instances are scattered across the full range of entropy
 values rather than clustering near zero. The Spearman ρ values shown
 in the panel titles are all near zero: -0.018 (BERT-base), -0.043
 (BioBERT), 0.021 (PubMedBERT), 0.142 (BioMistral-7B), 0.067
 (FLAN-T5-XXL), 0.013 (FLAN-T5-base).
 
-The BioMistral-7B panel shows the most striking pattern —
+The BioMistral-7B panel shows the most striking pattern -
 high-accuracy instances (x=0.8–1.0) still exhibit entropy of 0.6–0.8,
 well above what would be expected if accuracy and stability were
 related. This is the accuracy-stability dissociation visualised
@@ -116,7 +116,7 @@ directly.
 *Figure 2. Mean semantic entropy in the top 25% accuracy quartile
 (green) vs bottom 25% accuracy quartile (red) for each model.
 Pre-registered r=0.30 reference shown as dashed line. If dissociation
-exists, green and red bars should be similar height — high accuracy
+exists, green and red bars should be similar height - high accuracy
 does not reduce entropy.*
 
 **Analysis:**
@@ -137,9 +137,9 @@ height. The mean entropy values are:
 No model reached the pre-registered rank-biserial threshold of r ≥
 0.30. The Wilcoxon test was statistically significant for five of six
 models (BH-FDR p < 0.05), confirming the quartile difference is real,
-but effect sizes are small — accuracy explains very little variance
+but effect sizes are small - accuracy explains very little variance
 in entropy. BioMistral-7B (r=0.236) is the closest to the threshold,
-indicating the largest — though still sub-threshold — accuracy-entropy
+indicating the largest - though still sub-threshold - accuracy-entropy
 coupling among generative models.
 
 **Answer to SQ1:** Yes. High-accuracy models produce high semantic
@@ -150,7 +150,7 @@ accuracy-stability dissociation.
 
 ---
 
-### Sub-question 2 — Architecture Specificity
+### Sub-question 2 - Architecture Specificity
 
 ![Figure 3](outputs/rq2/figures/rq2_figure3_architecture_comparison.png)
 
@@ -163,13 +163,13 @@ but dissociation is confirmed in both architecture types.*
 
 Figure 3 shows that generative models (mean Ĥ=0.360) produce
 substantially higher entropy than encoder models (mean Ĥ=0.128).
-BioMistral-7B (0.606) is a clear outlier — the biomedical specialist
+BioMistral-7B (0.606) is a clear outlier - the biomedical specialist
 is paradoxically the most semantically unstable generative model
 despite its domain-specific training. FLAN-T5-base (0.253) and
 FLAN-T5-XXL (0.235) cluster closely, suggesting model scale alone
 does not reduce entropy in the generative family.
 
-Encoder models cluster tightly between 0.116 and 0.141 — domain
+Encoder models cluster tightly between 0.116 and 0.141 - domain
 adaptation (BioBERT, PubMedBERT) does not substantially change
 entropy relative to the general-purpose baseline (BERT-base).
 
@@ -182,14 +182,14 @@ Dissociation is confirmed in both architectures independently.
 
 **Answer to SQ2:** The dissociation is not architecture-specific.
 It appears in both encoder-only and generative models. However, the
-magnitude of entropy is architecture-specific — generative models
+magnitude of entropy is architecture-specific - generative models
 show 2.8× higher entropy than encoder models on average, indicating
 greater sensitivity to input variation in text-generation tasks
 compared to CUI-ranking tasks.
 
 ---
 
-### Sub-question 3 — Frequency of Unstable Correct Outputs
+### Sub-question 3 - Frequency of Unstable Correct Outputs
 
 ![Figure 4](outputs/rq2/figures/rq2_figure4_dissociation_summary.png)
 
@@ -201,12 +201,12 @@ the Spearman measure. No model meets the rank-biserial threshold.*
 
 **Analysis:**
 
-Figure 4 left panel shows rank-biserial r for all six models — all
+Figure 4 left panel shows rank-biserial r for all six models - all
 bars fall below the 0.30 dashed threshold (red). This means the
 magnitude of the entropy difference between accurate and inaccurate
 instances is small for every model.
 
-Figure 4 right panel shows Spearman |ρ| — all bars fall below 0.30
+Figure 4 right panel shows Spearman |ρ| - all bars fall below 0.30
 (green). This confirms that accuracy and entropy are essentially
 uncorrelated for every model individually.
 
@@ -224,7 +224,7 @@ with high accuracy AND Ĥ > 0.20):
 
 Over 30% of high-accuracy encoder instances and over 30% of
 high-accuracy BioMistral instances show non-trivial entropy (Ĥ > 0.20).
-For FLAN-T5 models the figure exceeds 56% — more than half of
+For FLAN-T5 models the figure exceeds 56% - more than half of
 apparently correct FLAN-T5 outputs are semantically unstable when
 tested with meaning-preserving perturbations.
 

@@ -1,7 +1,7 @@
 ---
 
 # RQ1 Research Report: Linguistic Predictors of Semantic Entropy
-## SIT723 - PhD Research Techniques and Applications
+## SIT723 - masters Research Techniques and Applications
 
 ---
 
@@ -201,8 +201,8 @@ requiring confirmatory analysis with a larger syntactic reordering sample.
 | Syntactic reordering | +0.096 | [0.060, 0.157] | 8.5×10⁻⁶ | ✅ Significant |
 | Lexical magnitude | +0.143 | [0.012, 0.228] | 0.006 | ✅ Significant |
 | Task accuracy | −0.076 | [−0.115, −0.031] | 0.022 | ✅ Significant |
-| Linguistic category (all) | — | — | >0.30 | ❌ Not significant |
-| Type × Category interaction | — | — | exploratory | — |
+| Linguistic category (all) | - | - | >0.30 | ❌ Not significant |
+| Type × Category interaction | - | - | exploratory | - |
 
 **Model:** MixedLM REML, converged (547 groups, 4,800 observations, Marginal R²=0.2259, Conditional R²=0.2413, Bootstrap B=1,000 cluster resamples)
 **Note:** Cohen f² values were below the pre-registered threshold

@@ -106,7 +106,7 @@ in the panel titles are all near zero: -0.018 (BERT-base), -0.043
 (FLAN-T5-XXL), 0.013 (FLAN-T5-base).
 
 The BioMistral-7B panel shows the most striking pattern -
-high-accuracy instances (x=0.8–1.0) still exhibit entropy of 0.6–0.8,
+high-accuracy instances (x=0.8-1.0) still exhibit entropy of 0.6-0.8,
 well above what would be expected if accuracy and stability were
 related. This is the accuracy-stability dissociation visualised
 directly.
@@ -230,7 +230,7 @@ tested with meaning-preserving perturbations.
 
 **Answer to SQ3:** Semantically unstable correct outputs are common,
 not rare. More than 30% of high-accuracy encoder instances and more
-than 30–57% of high-accuracy generative instances show entropy above
+than 30-57% of high-accuracy generative instances show entropy above
 0.20. Traditional accuracy metrics would classify all of these as
 successful outputs. UMLS-grounded semantic entropy reveals that more
 than a third of them are actually inconsistent in their concept

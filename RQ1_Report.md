@@ -159,7 +159,7 @@ entropy under back-translation (Ĥ=0.048) and controlled paraphrase
 
 *Figure 5. Heatmap of mean conditional semantic entropy by perturbation
 type (x-axis) and linguistic category (y-axis). Colour scale compressed
-to 0–0.25 to show within-data variation. Grey cells were excluded from
+to 0-0.25 to show within-data variation. Grey cells were excluded from
 inferential modelling (fewer than 3 unique instances).*
 
 **Analysis:**
@@ -200,7 +200,7 @@ requiring confirmatory analysis with a larger syntactic reordering sample.
 |---|---|---|---|---|
 | Syntactic reordering | +0.096 | [0.060, 0.157] | 8.5×10⁻⁶ | ✅ Significant |
 | Lexical magnitude | +0.143 | [0.012, 0.228] | 0.006 | ✅ Significant |
-| Task accuracy | −0.076 | [−0.115, −0.031] | 0.022 | ✅ Significant |
+| Task accuracy | -0.076 | [-0.115, -0.031] | 0.022 | ✅ Significant |
 | Linguistic category (all) | - | - | >0.30 | ❌ Not significant |
 | Type × Category interaction | - | - | exploratory | - |
 

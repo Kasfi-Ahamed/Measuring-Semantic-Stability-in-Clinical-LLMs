@@ -175,7 +175,7 @@ SQ3 answered descriptively only.
 ### Primary Figures
 
 **Figure 1** - Lexical magnitude versus semantic entropy scatter plot
-`outputs/rq1/figures/rq1_figure3_lexical_change_vs_entropy.png`
+![Figure 1](outputs/rq1/figures/rq1_figure3_lexical_change_vs_entropy.png)
 
 Scatter plot of lexical change magnitude (normalised Levenshtein
 distance) versus normalised semantic entropy (N = 4,800 observations).
@@ -184,7 +184,7 @@ lines shown at 0.20 and 0.40. Spearman rho = 0.100,
 p = 9.87 x 10^-13. Primary quantitative figure for SQ2.
 
 **Figure 2** - Entropy heatmap by perturbation type and linguistic category
-`outputs/rq1/figures/rq1_figure5_entropy_heatmap.png`
+![Figure 2](outputs/rq1/figures/rq1_figure5_entropy_heatmap.png)
 
 Mean conditional entropy for every perturbation-type by
 linguistic-category combination. Colour scale 0 to 0.25.
@@ -282,7 +282,7 @@ none of these cases.
 ### Primary Figures
 
 **Figure 3** - Top versus bottom accuracy quartile entropy comparison
-`outputs/rq2/figures/rq2_figure2_quartile_comparison.png`
+![Figure 3](outputs/rq2/figures/rq2_figure2_quartile_comparison.png)
 
 Mean semantic entropy in the top 25 percent accuracy quartile versus
 the bottom 25 percent accuracy quartile for each of the six models.
@@ -291,7 +291,7 @@ a dashed line. Near-equal bar heights confirm the accuracy-stability
 dissociation. Primary figure for SQ1.
 
 **Figure 4** - Dissociation evidence per model
-`outputs/rq2/figures/rq2_figure4_dissociation_summary.png`
+![Figure 4](outputs/rq2/figures/rq2_figure4_dissociation_summary.png)
 
 Left panel: rank-biserial r for the Wilcoxon top-versus-bottom
 quartile test. All bars fall below the pre-registered threshold
@@ -388,7 +388,7 @@ finer-grained semantic distinctions within the clinical domain.
 ### Primary Figures
 
 **Figure 5** - Domain-continuum line plot
-`outputs/rq3/figures/rq3_figure1_domain_continuum.png`
+![Figure 5](outputs/rq3/figures/rq3_figure1_domain_continuum.png)
 
 Mean normalised entropy for all six models across three datasets
 ordered by proximity to clinical text. MedMentions to BioASQ to
@@ -398,7 +398,7 @@ on BioASQ. The three 110M encoder models are visually
 indistinguishable. Primary figure for SQ2.
 
 **Figure 6** - Within-scale Pair 2: BioMistral-7B versus FLAN-T5-XXL
-`outputs/rq3/figures/rq3_figure3_pair2_largescale.png`
+![Figure 6](outputs/rq3/figures/rq3_figure3_pair2_largescale.png)
 
 BioMistral-7B bars are substantially taller than FLAN-T5-XXL on
 every dataset. Negative rank-biserial r values confirm the reversed

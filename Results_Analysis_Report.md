@@ -174,23 +174,181 @@ SQ3 answered descriptively only.
 
 ### Primary Figures
 
-**Figure 1** - Lexical magnitude versus semantic entropy scatter plot
-![Figure 1](outputs/rq1/figures/rq1_figure3_lexical_change_vs_entropy.png)
+---
 
-Scatter plot of lexical change magnitude (normalised Levenshtein
-distance) versus normalised semantic entropy (N = 4,800 observations).
-The OLS regression line confirms a positive slope. Gate threshold
-lines shown at 0.20 and 0.40. Spearman rho = 0.100,
-p = 9.87 x 10^-13. Primary quantitative figure for SQ2.
+#### Figure 1a — Lexical Magnitude vs Entropy (Combined, all three encoder models)
 
-**Figure 2** - Entropy heatmap by perturbation type and linguistic category
-![Figure 2](outputs/rq1/figures/rq1_figure5_entropy_heatmap.png)
+![Figure 1a](outputs/rq1/figures/rq1_figC_scatter.png)
+
+Dual-panel scatter plot of mean lexical change magnitude
+(normalised Levenshtein distance) versus normalised semantic
+entropy (Ĥ), averaged across all three 110M encoder models.
+Points are colour-coded by number of unique CUIs assigned
+across the eight perturbation variants — light blue for one
+CUI (stable), blue for two CUIs (binary competition), and
+orange for three CUIs (multi-concept fragmentation, rare).
+
+Left panel shows all instances (n = 4,854, Spearman rho =
+0.101). The positive OLS regression slope is shallow but
+consistent with the regression-level coefficient beta = 0.143
+(Table IV). The dominant pattern is two horizontal bands:
+one at Ĥ = 0 (perfect stability, grey/blue) and one at
+Ĥ = 0.58 (binary two-CUI competition, blue). Intermediate
+bands between 0.60 and 0.95 represent the rare three-CUI
+fragmentation cases (orange).
+
+Right panel shows non-zero entropy instances only (n = 1,007,
+Spearman rho = -0.401). Among instances that became unstable,
+larger lexical changes are associated with lower entropy rather
+than higher — meaning minor surface changes produce more
+diffuse multi-CUI fragmentation while larger changes tend to
+produce focused two-way concept competition. The negative
+correlation among unstable instances is consistent across all
+three models (BERT-base rho = -0.413, BioBERT rho = -0.379,
+PubMedBERT rho = -0.408).
+
+Y axis uses 0.1 increments with horizontal gridlines to allow
+precise reading of band positions. Spearman rho annotation
+is placed bottom-right on each panel. Legend is placed outside
+the plot to the right to avoid obscuring data. Primary
+quantitative figure for SQ2.
+
+---
+
+#### Figure 1b — Lexical Magnitude vs Entropy (BERT-base, General domain, 110M)
+
+![Figure 1b](outputs/rq1/figures/rq1_fig_bertbase_C_scatter.png)
+
+Per-model scatter for BERT-base. Left panel: all instances
+(n = 1,618, Spearman rho = 0.097). Right panel: non-zero
+entropy instances only (n = 344, Spearman rho = -0.413).
+The banding pattern and direction of the non-zero panel
+negative slope are consistent with the combined figure.
+BERT-base shows the lowest Spearman rho on the all-instances
+panel of the three encoder models, indicating the weakest
+(though still positive) lexical magnitude effect.
+
+---
+
+#### Figure 1c — Lexical Magnitude vs Entropy (BioBERT, Biomedical domain, 110M)
+
+![Figure 1c](outputs/rq1/figures/rq1_fig_biobert_C_scatter.png)
+
+Per-model scatter for BioBERT. Left panel: all instances
+(n = 1,618, Spearman rho = 0.109). Right panel: non-zero
+entropy instances only (n = 340, Spearman rho = -0.379).
+BioBERT produces the highest Spearman rho on the all-instances
+panel of the three encoder models. The non-zero panel negative
+slope (rho = -0.379) is slightly attenuated compared to
+BERT-base and PubMedBERT, suggesting marginally less
+polarised instability behaviour when the model becomes
+unstable.
+
+---
+
+#### Figure 1d — Lexical Magnitude vs Entropy (PubMedBERT, Biomedical PubMed-only, 110M)
+
+![Figure 1d](outputs/rq1/figures/rq1_fig_pubmedbert_C_scatter.png)
+
+Per-model scatter for PubMedBERT. Left panel: all instances
+(n = 1,618, Spearman rho = 0.098). Right panel: non-zero
+entropy instances only (n = 323, Spearman rho = -0.408).
+PubMedBERT shows the fewest non-zero entropy instances of
+the three encoders (n = 323 versus 344 and 340), indicating
+marginally greater overall stability under perturbation.
+The non-zero panel rho of -0.408 is the second largest in
+absolute value, consistent with a strong polarisation between
+stable and binary-competition outcomes when instability does
+occur.
+
+The qualitative consistency of rho values across all three
+per-model panels (all-instances: 0.097, 0.109, 0.098;
+non-zero: -0.413, -0.379, -0.408) confirms that the lexical
+magnitude effect observed in the combined figure is
+model-agnostic rather than driven by any single encoder.
+
+---
+
+#### Figure 2a — Entropy Heatmap by Perturbation Type and Linguistic Category (Combined)
+
+![Figure 2a](outputs/rq1/figures/rq1_fig5_entropy_heatmap.png)
 
 Mean conditional entropy for every perturbation-type by
-linguistic-category combination. Colour scale 0 to 0.25.
-Grey cells indicate excluded combinations with fewer than three
-unique instances. Darkest cell: noun by syntactic reordering
-(H = 0.277). Primary figure for SQ1 and SQ3.
+linguistic-category combination, averaged across all three
+110M encoder models. Colour scale 0 to 0.25 using YlGnBu
+palette — yellow indicates low entropy (stable), dark blue
+indicates high entropy (unstable). Grey cells with "excluded
+(n<3)" labels indicate combinations with fewer than three
+unique instances that were excluded from inferential modelling.
+
+The syntactic reordering column is consistently the darkest
+across all linguistic categories, visually corroborating the
+regression finding that syntactic reordering is the only
+perturbation type to reach BH-FDR significance (beta = 0.096,
+p = 8.5 x 10^-6). The darkest individual cell is noun by
+syntactic reordering (Ĥ = 0.293). The lightest populated
+cell is verb by back-translation (Ĥ = 0.045). The back-
+translation column shows the most variation across linguistic
+categories, with noun (Ĥ = 0.193) notably higher than verb
+(Ĥ = 0.045) and function word (Ĥ = 0.097). Primary figure
+for SQ1 and descriptive evidence for SQ3.
+
+---
+
+#### Figure 2b — Entropy Heatmap (BERT-base, General domain, 110M)
+
+![Figure 2b](outputs/rq1/figures/rq1_fig_bertbase_E_heatmap.png)
+
+Per-model heatmap for BERT-base. The syntactic reordering
+column is the darkest on this model too, confirming the
+model-agnostic pattern. BERT-base shows a notably high noun
+by back-translation cell (Ĥ = 0.331) that is higher than
+the same cell in the other two models and higher than any
+syntactic reordering cell for BERT-base, indicating that
+general-domain pretraining may produce stronger sensitivity
+to noun-level back-translation variation. Maximum cell:
+noun by back-translation (Ĥ = 0.331).
+
+---
+
+#### Figure 2c — Entropy Heatmap (BioBERT, Biomedical domain, 110M)
+
+![Figure 2c](outputs/rq1/figures/rq1_fig_biobert_E_heatmap.png)
+
+Per-model heatmap for BioBERT. The syntactic reordering
+column is the darkest with modifier (Ĥ = 0.288) and mixed
+(Ĥ = 0.283) cells both above 0.28. Unlike BERT-base, the
+back-translation column is more uniform across linguistic
+categories for BioBERT, consistent with biomedical pretraining
+reducing sensitivity to back-translation variation for noun
+tokens specifically. Maximum cell: modifier by syntactic
+reordering (Ĥ = 0.288).
+
+---
+
+#### Figure 2d — Entropy Heatmap (PubMedBERT, Biomedical PubMed-only, 110M)
+
+![Figure 2d](outputs/rq1/figures/rq1_fig_pubmedbert_E_heatmap.png)
+
+Per-model heatmap for PubMedBERT. PubMedBERT produces the
+single highest entropy value of any model-cell combination —
+noun by syntactic reordering at Ĥ = 0.368 — indicating that
+PubMed-specific pretraining creates the greatest sensitivity
+to noun-level syntactic reordering of the three encoder
+models. This is consistent with the PubMedBERT training
+corpus being highly structured and syntactically regular,
+making the model more sensitive to clause-order disruption.
+The verb by back-translation cell is 0.000 — the lowest
+non-excluded value across all three models — indicating
+near-perfect stability for verb-level back-translation
+perturbations. Maximum cell: noun by syntactic reordering
+(Ĥ = 0.368).
+
+The dominance of the syntactic reordering column is visible
+and consistent across all three per-model heatmaps (2b, 2c,
+2d), confirming that the combined figure in 2a is not driven
+by any single model and that the regression-level syntactic
+reordering effect is genuinely model-agnostic.
 
 ---
 

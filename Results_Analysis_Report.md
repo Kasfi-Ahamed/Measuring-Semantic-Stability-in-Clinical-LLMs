@@ -178,7 +178,7 @@ SQ3 answered descriptively only.
 
 #### Figure 1a — Lexical Magnitude vs Entropy (Combined, all three encoder models)
 
-![Figure 1a](outputs/rq1/figures/rq1_figC_scatter.png)
+![Figure 1a](outputs/rq1/figures/rq1_figure3_lexical_change_vs_entropy.png)
 
 Dual-panel scatter plot of mean lexical change magnitude
 (normalised Levenshtein distance) versus normalised semantic
@@ -271,7 +271,7 @@ model-agnostic rather than driven by any single encoder.
 
 #### Figure 2a — Entropy Heatmap by Perturbation Type and Linguistic Category (Combined)
 
-![Figure 2a](outputs/rq1/figures/rq1_fig5_entropy_heatmap.png)
+![Figure 2a](outputs/rq1/figures/rq1_figure5_entropy_heatmap.png)
 
 Mean conditional entropy for every perturbation-type by
 linguistic-category combination, averaged across all three

@@ -613,32 +613,25 @@ UMLS-linked entities. This was documented before analysis.
 
 | Perturbation type | Generated | Accepted |
 |---|---|---|
-| Back-translation | 1,200 total | [verify: outputs/rq3/tables/rq3_pipeline_summary.csv] |
-| Synonym substitution | | [verify] |
-| Controlled paraphrase | | [verify] |
-| Syntactic reordering | | [verify] |
-| **Total** | **1,200** | **[verify total and acceptance rate]** |
+| Back-translation | 1,200 total | 140 |
+| Synonym substitution | | 148 |
+| Controlled paraphrase | | 166 |
+| Syntactic reordering | | 2 |
+| **Total** | **1,200** | **456 (38.0%)** |
 
 **SQuAD 2.0 (200 instances — general distal)**
 
 | Perturbation type | Generated | Accepted |
 |---|---|---|
-| Back-translation | 1,600 total | [verify: outputs/rq3/tables/rq3_pipeline_summary.csv] |
-| Synonym substitution | | [verify] |
-| Controlled paraphrase | | [verify] |
-| Syntactic reordering | | [verify] |
-| **Total** | **1,600** | **[verify total and acceptance rate]** |
+| Back-translation | 1,600 total | 186 |
+| Synonym substitution | | 108 |
+| Controlled paraphrase | | 158 |
+| Syntactic reordering | | 176 |
+| **Total** | **1,600** | **628 (39.2%)** |
 
-Note: Exact accepted counts for BioASQ and SQuAD must be
-verified from outputs/rq3/tables/rq3_pipeline_summary.csv
-before final submission. To retrieve the exact counts run
-the following in the RQ3 notebook:
-
-```python
-print(df_rq3.groupby(
-    ["dataset", "perturbation_type"]
-)["instance_id"].count())
-```
+Note: Exact accepted counts for BioASQ and SQuAD are reported
+from the final accepted perturbation records generated in the
+RQ3 analysis pipeline.
 
 Syntactic reordering consistently produces the fewest accepted
 perturbations across all three datasets because clinical and

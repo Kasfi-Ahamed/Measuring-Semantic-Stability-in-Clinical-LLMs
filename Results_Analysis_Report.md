@@ -73,8 +73,11 @@ accepted.
 
 Entropy is normalised Shannon entropy H = -sum p(si) log2(p(si))
 divided by log2(k+1), producing values on the interval [0, 1].
-All generative models use greedy decoding (T = 0) to eliminate
-sampling stochasticity as a confound. All statistical tests are
+All generative models use greedy decoding with do_sample=False
+ensuring fully deterministic output so that any observed
+variation in model responses originates from the
+meaning-preserving input perturbations rather than sampling
+randomness. All statistical tests are
 corrected with Benjamini-Hochberg FDR at q = 0.05. Bootstrap
 confidence intervals use B = 1,000 cluster resamples.
 
@@ -370,6 +373,91 @@ Fisher z-pooled absolute rho < 0.30 for global confirmation.
 
 ---
 
+### Model Inputs and Outputs
+
+---
+
+#### What Goes Into Each Model in RQ2
+
+RQ2 uses all six models across both encoder and generative
+architectures. The input for all models is the same set used
+in RQ1 — 550 original MedMentions clinical sentences plus
+2,674 accepted meaning-preserving perturbations giving 3,224
+total input texts per model. Each instance can have up to 8
+perturbations but the actual number varies per instance after
+six-gate validation.
+
+Encoder models (BERT-base, BioBERT, PubMedBERT): Each input
+text is encoded into a dense embedding vector and compared
+against the MeSH-linker UMLS candidate pool via cosine
+similarity. Output is one UMLS CUI per input text. Accuracy
+is measured by whether the predicted CUI matches the
+MedMentions gold CUI. Entropy is computed from the
+distribution of CUI assignments across the original and its
+accepted perturbations for that instance.
+
+Generative models (FLAN-T5-base, FLAN-T5-XXL, BioMistral-7B):
+Each input text is wrapped in a structured prompt asking the
+model to identify the primary medical concept and return the
+concept name only. Greedy decoding with do_sample=False
+ensures output is fully deterministic so any variation in
+generated answers originates from input perturbations not
+sampling randomness. Output is a free-text concept name per
+input. Accuracy is measured by gold-answer substring match
+against the MedMentions gold mention. Entropy is computed from
+the distribution of generated concept names across the
+original and accepted perturbations for that instance.
+
+---
+
+#### How Top and Bottom Quartiles Are Calculated
+
+Step 1 — Calculate instance-level accuracy. For each of the
+547 instances, compute the proportion of inputs where the
+model output matched the gold label across the original and
+all accepted perturbations.
+
+Step 2 — Rank all 547 instances by accuracy from lowest to
+highest.
+
+Step 3 — Split into quartiles. Top-Q is the 137 instances
+with the highest accuracy. Bottom-Q is the 137 instances with
+the lowest accuracy. The middle 50 percent are excluded from
+the quartile comparison.
+
+Step 4 — Compute mean entropy for each group. Compare
+Top-Q mean entropy against Bottom-Q mean entropy using the
+Wilcoxon signed-rank test. If accuracy and entropy were
+related, Top-Q instances would show substantially lower
+entropy than Bottom-Q instances. The finding across all six
+models is that mean entropy in the top and bottom quartiles
+is nearly identical — confirming the accuracy-stability
+dissociation.
+
+---
+
+#### Accuracy vs Entropy — The Core Distinction
+
+Accuracy measures whether the model output matched the gold
+label. Entropy measures how consistently the model produced
+the same output across meaning-preserving input variations.
+They are independent properties. A model can be:
+
+- High accuracy and low entropy — correct and consistent
+- High accuracy and high entropy — correct on average but
+  produces different answers when the same content is
+  rephrased (the dangerous case in clinical NLP)
+- Low accuracy and low entropy — wrong but consistently wrong
+- Low accuracy and high entropy — wrong and inconsistent
+
+RQ2 finds that high accuracy provides no reliable indication
+of low entropy. Between 30.7 and 57.6 percent of high-accuracy
+outputs across the six models are semantically unstable under
+meaning-preserving perturbation. Accuracy-based evaluation
+identifies none of these cases.
+
+---
+
 ### Per-Model Statistical Results
 
 | Model | Architecture | Top-Q mean H | Bottom-Q mean H | Rank-biserial r | Spearman rho | Dissociation |
@@ -474,6 +562,166 @@ and does any stability advantage generalise across the domain continuum?**
 **Within-scale pairs (pre-registered):**
 Pair 1: BioBERT versus BERT-base (both 110M parameters).
 Pair 2: BioMistral-7B versus FLAN-T5-XXL (large-scale tier).
+
+---
+
+### Model Inputs and Outputs
+
+---
+
+#### Perturbation Pipeline for RQ3
+
+All three datasets used the same four meaning-preserving
+perturbation methods and the same six-gate quality pipeline
+as RQ1. Eight perturbations per instance were attempted for
+every dataset.
+
+**Four perturbation methods applied to all datasets:**
+- Back-translation using Helsinki-NLP Marian EN-DE-EN
+- Controlled paraphrase using humarin/chatgpt_paraphraser_on_T5_base
+- UMLS-validated synonym substitution using TextFooler-style
+  replacement with ScispaCy entity linking
+- Syntactic reordering via spaCy dependency parse
+
+**Six gates applied to all datasets:**
+- G1 Sentence-BERT cosine embedding similarity >= 0.85
+- G2 NLI bidirectional entailment >= 0.72
+- G3 Negation preservation
+- G4 LanguageTool grammaticality
+- G5 Normalised Levenshtein divergence in [0.05, 0.60]
+- G6 UMLS entity preservation via ScispaCy
+
+Pre-registered deviation: G6 is not applicable to BioASQ and
+SQuAD 2.0 because gold answers in QA datasets are not
+UMLS-linked entities. This was documented before analysis.
+
+---
+
+#### Pipeline Acceptance by Dataset
+
+**MedMentions ST21pv (550 instances — primary dataset)**
+
+| Perturbation type | Generated | Accepted |
+|---|---|---|
+| Back-translation | 4,400 total | 920 |
+| Synonym substitution | | 826 |
+| Controlled paraphrase | | 767 |
+| Syntactic reordering | | 161 |
+| **Total** | **4,400** | **2,674 (60.8%)** |
+
+**BioASQ Task B (150 instances — biomedical midpoint)**
+
+| Perturbation type | Generated | Accepted |
+|---|---|---|
+| Back-translation | 1,200 total | [verify: outputs/rq3/tables/rq3_pipeline_summary.csv] |
+| Synonym substitution | | [verify] |
+| Controlled paraphrase | | [verify] |
+| Syntactic reordering | | [verify] |
+| **Total** | **1,200** | **[verify total and acceptance rate]** |
+
+**SQuAD 2.0 (200 instances — general distal)**
+
+| Perturbation type | Generated | Accepted |
+|---|---|---|
+| Back-translation | 1,600 total | [verify: outputs/rq3/tables/rq3_pipeline_summary.csv] |
+| Synonym substitution | | [verify] |
+| Controlled paraphrase | | [verify] |
+| Syntactic reordering | | [verify] |
+| **Total** | **1,600** | **[verify total and acceptance rate]** |
+
+Note: Exact accepted counts for BioASQ and SQuAD must be
+verified from outputs/rq3/tables/rq3_pipeline_summary.csv
+before final submission. To retrieve the exact counts run
+the following in the RQ3 notebook:
+
+```python
+print(df_rq3.groupby(
+    ["dataset", "perturbation_type"]
+)["instance_id"].count())
+```
+
+Syntactic reordering consistently produces the fewest accepted
+perturbations across all three datasets because clinical and
+biomedical sentences have rigid syntactic structures that cause
+reordered variants to fail G1 embedding similarity and G4
+grammaticality checks more frequently than lexical substitution
+methods.
+
+---
+
+#### Inputs and Outputs by Model Type and Dataset
+
+**MedMentions ST21pv**
+
+Encoder models (BERT-base, BioBERT, PubMedBERT): Input is
+550 original clinical sentences plus 2,674 accepted
+perturbations giving 3,224 total input texts. Each text is
+encoded into a dense embedding vector and compared against
+the MeSH-linker UMLS candidate pool via cosine similarity.
+Output is one UMLS CUI per input. Accuracy is measured by
+whether the predicted CUI matches the MedMentions gold CUI.
+Entropy is computed from the distribution of CUI assignments
+across the original and its accepted perturbations.
+
+Generative models (FLAN-T5-base, FLAN-T5-XXL, BioMistral-7B):
+Same 3,224 input texts wrapped in a structured prompt asking
+the model to identify the primary medical concept and return
+the concept name only. Greedy decoding with do_sample=False
+ensures output is fully deterministic so any variation in
+generated answers originates from input perturbations not
+sampling randomness. Output is a free-text concept name per
+input. Accuracy is measured by gold-answer substring match.
+Entropy is computed from the distribution of generated concept
+names across the original and perturbations.
+
+**BioASQ Task B**
+
+Encoder models: Input is 150 biomedical questions plus
+accepted perturbations. Each question-text is encoded and
+compared against a candidate answer pool via cosine
+similarity. Because gold answers in BioASQ are not
+UMLS-linked entities, UMLS CUI cosine assignment produces
+identical entropy values across all three encoder models on
+this dataset. Entropy is therefore computed using cosine
+similarity cluster bins rather than CUI assignment directly.
+This produced the Pair 1 finding of rank-biserial r = 0.000
+for BioBERT versus BERT-base on BioASQ.
+
+Generative models: Same biomedical questions plus
+perturbations wrapped in a prompt asking the model to answer
+the biomedical question concisely. Greedy decoding with
+do_sample=False. Output is a free-text answer. Accuracy by
+gold-answer substring match. Entropy from distribution of
+generated answers across perturbations.
+
+**SQuAD 2.0**
+
+Encoder models: Input is 200 Wikipedia passage-question pairs
+plus accepted perturbations. Cosine similarity cluster bin
+approach used for the same reasons as BioASQ. Gold answers
+are not UMLS-linked. Produces the Pair 1 finding of
+rank-biserial r = 0.000 for BioBERT versus BERT-base on
+SQuAD 2.0.
+
+Generative models: Same passage-question pairs plus
+perturbations in a prompt asking the model to read the
+passage and answer the question concisely. Greedy decoding
+with do_sample=False. Output is a free-text extractive
+answer. Accuracy by gold-answer substring match. Entropy
+from distribution of generated answers across perturbations.
+
+---
+
+#### Complete Input-Output Reference Table
+
+| Model type | Dataset | Input | Output | Accuracy measure | Entropy source |
+|---|---|---|---|---|---|
+| Encoder | MedMentions | 550 originals + 2,674 perturbations | UMLS CUI via cosine similarity | CUI matches gold CUI | CUI distribution across perturbations |
+| Encoder | BioASQ | Questions + perturbations | Cosine similarity cluster bin | Not primary | Cluster bin distribution |
+| Encoder | SQuAD 2.0 | Passage-question + perturbations | Cosine similarity cluster bin | Not primary | Cluster bin distribution |
+| Generative | MedMentions | Prompted originals + perturbations | Free-text concept name | Substring match to gold mention | Generated answer distribution |
+| Generative | BioASQ | Prompted questions + perturbations | Free-text answer | Substring match to gold answer | Generated answer distribution |
+| Generative | SQuAD 2.0 | Prompted passage-question + perturbations | Free-text extractive answer | Substring match to gold answer | Generated answer distribution |
 
 ---
 
